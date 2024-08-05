@@ -115,23 +115,35 @@
             pillElement.textContent = "Not Supported";
             var liElement = document.getElementById(id);
             liElement.classList.add("list-group-item-danger");
+        } else if (type === "a") {
+            var pillElement = document.getElementById(`pill-${id}`);
+            pillElement.className = "badge rounded-pill bg-success";
+            pillElement.textContent = "Available";
+            var liElement = document.getElementById(id);
+            liElement.classList.add("list-group-item-success");
+        } else if (type === "na") {
+            var pillElement = document.getElementById(`pill-${id}`);
+            pillElement.className = "badge rounded-pill bg-danger";
+            pillElement.textContent = "Not Available";
+            var liElement = document.getElementById(id);
+            liElement.classList.add("list-group-item-danger");
         }
     }
 
     //function getBrowserInfo() {
     //    var details = {};
-//
+    //
     //    if (typeof navigator.userAgentData !== 'undefined') {
-//
+    //
     //        data = navigator.userAgentData;
-//
+    //
     //        details.os = data.platform;
     //        details.browserName = data.brands[2].brand;
     //        details.browserVersion = data.brands[2].version;
     //    } else {
     //        
     //    }
-//
+    //
     //    return details;
     //}
 
@@ -149,13 +161,13 @@
                     console.log(JSON.stringify(capabilities));
 
                     // Passkey Platform Authenticator
-                    if (capabilities.hasOwnProperty('passkeyPlatformAuthenticator')) capabilities.passkeyPlatformAuthenticator ? updateStyle("ppa", "s") : updateStyle("ppa", "ns")
+                    if (capabilities.hasOwnProperty('passkeyPlatformAuthenticator')) capabilities.passkeyPlatformAuthenticator ? updateStyle("ppa", "a") : updateStyle("ppa", "na")
 
                     // UVPAA
-                    if (capabilities.hasOwnProperty('userVerifyingPlatformAuthenticator')) capabilities.userVerifyingPlatformAuthenticator ? updateStyle("uvpa", "s") : updateStyle("uvpa", "ns")
+                    if (capabilities.hasOwnProperty('userVerifyingPlatformAuthenticator')) capabilities.userVerifyingPlatformAuthenticator ? updateStyle("uvpa", "a") : updateStyle("uvpa", "na")
 
                     // Hybrid
-                    if (capabilities.hasOwnProperty('hybridTransport')) capabilities.hybridTransport ? updateStyle("hybrid", "s") : updateStyle("hybrid", "ns")
+                    if (capabilities.hasOwnProperty('hybridTransport')) capabilities.hybridTransport ? updateStyle("hybrid", "a") : updateStyle("hybrid", "na")
 
 
                     // Conditional Get
@@ -213,4 +225,5 @@
     checkClientFeatures();
 
 </script>
+
 </html>
