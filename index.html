@@ -201,7 +201,7 @@
                 // Check isUVPAA and isConditionalMediation the old way
                 try {
                     const isuvpaa = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
-                    isuvpaa ? updateStyle("uvpa", "s") : updateStyle("uvpa", "ns");
+                    isuvpaa ? updateStyle("uvpa", "a") : updateStyle("uvpa", "na");
 
                 } catch (error) {
                     console.error("Error fetching PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable():", error);
