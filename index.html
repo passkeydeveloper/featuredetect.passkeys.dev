@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebAuthn Features and Capability Detection | passkeys.dev</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180" type="image/png">
+    <link rel="icon" href="https://passkeys.dev/favicon-192x192.png" sizes="192x192" type="image/png">
+    <link rel="icon" href="https://passkeys.dev/favicon-512x512.png" sizes="512x512" type="image/png">
+</head>
+
+<body class="d-flex flex-column h-100">
+    <main class="flex-shrink-0">
+        <div class="container">
+            <div class="text-center mt-4">
+                <img src="img/passkey-icon-2024-color-box.svg" height="130px" alt="passkeys icon" />
+                <h2>WebAuthn Features <br />and Capability Detection</h2>
+            </div>
+            <div class="mt-3">
+                <div id="nowebauthn" class="mt-5" style="display: none;">
+                    <div class="alert alert-danger text-center" role="alert">
+                        <h2>⚠️ WebAuthn support not detected</h2>
+                    </div>
+                </div>
+                <div id="list" class="mt-5">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center pt-3">
+                            <h4>Features</h4>
+                        </li>
+                        <li id="getcc" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://w3c.github.io/webauthn/#sctn-getClientCapabilities" target="_blank">
+                                Get Client Capabilities</a>
+                            <span id="pill-getcc" class="badge bg-secondary rounded-pill">Unknown</span>
+                        </li>
+                        <li id="condget" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://passkeys.dev/docs/reference/terms/#autofill-ui" target="_blank">Conditional
+                                Get
+                                (Autofill UI)</a>
+                            <span id="pill-condget" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="condcreate" class="list-group-item d-flex justify-content-between align-items-center">
+                            Conditional Create
+                            <span id="pill-condcreate" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="ror" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://w3c.github.io/webauthn/#sctn-related-origins" target="_blank">Related
+                                Origin
+                                Requests</a>
+                            <span id="pill-ror" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="tojson" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://w3c.github.io/webauthn/#dom-publickeycredential-tojson"
+                                target="_blank">toJSON() Method</a>
+                            <span id="pill-tojson" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="jsonreq" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://w3c.github.io/webauthn/#dom-publickeycredential-parserequestoptionsfromjson"
+                                target="_blank">Parse JSON Request Options</a>
+                            <span id="pill-jsonreq" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="jsoncreate" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://w3c.github.io/webauthn/#dom-publickeycredential-parsecreationoptionsfromjson"
+                                target="_blank">Parse JSON Creation Options</a>
+                            <span id="pill-jsoncreate" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center pt-3">
+                            <h4>Client Capabilities</h4>
+                        </li>
+                        <li id="ppa" class="list-group-item d-flex justify-content-between align-items-center">
+                            Passkey Platform Authenticator
+                            <span id="pill-ppa" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="uvpa" class="list-group-item d-flex justify-content-between align-items-center">
+                            User Verifying Platform Authenticator
+                            <span id="pill-uvpa" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="hybrid" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://passkeys.dev/docs/reference/terms/#cross-device-authentication-cda"
+                                target="_blank">Hybrid Transports</a>
+                            <span id="pill-hybrid" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="extprf" class="list-group-item d-flex justify-content-between align-items-center">
+                            Extension: PRF
+                            <span id="pill-extprf" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="container mt-5">
+        <span class="text-muted text-center">Back to <a href="https://passkeys.dev">passkeys.dev</a></span>
+    </div>
+</body>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script>
+
+    function updateStyle(id, type) {
+        if (type === "s") {
+            var pillElement = document.getElementById(`pill-${id}`);
+            pillElement.className = "badge rounded-pill bg-success";
+            pillElement.textContent = "Supported";
+            var liElement = document.getElementById(id);
+            liElement.classList.add("list-group-item-success");
+        } else if (type === "ns") {
+            var pillElement = document.getElementById(`pill-${id}`);
+            pillElement.className = "badge rounded-pill bg-danger";
+            pillElement.textContent = "Not Supported";
+            var liElement = document.getElementById(id);
+            liElement.classList.add("list-group-item-danger");
+        }
+    }
+
+    //function getBrowserInfo() {
+    //    var details = {};
+//
+    //    if (typeof navigator.userAgentData !== 'undefined') {
+//
+    //        data = navigator.userAgentData;
+//
+    //        details.os = data.platform;
+    //        details.browserName = data.brands[2].brand;
+    //        details.browserVersion = data.brands[2].version;
+    //    } else {
+    //        
+    //    }
+//
+    //    return details;
+    //}
+
+    async function checkClientFeatures() {
+
+        if (typeof window.PublicKeyCredential !== 'undefined') {
+            if (typeof window.PublicKeyCredential.getClientCapabilities === 'function') {
+
+                updateStyle("getcc", "s");
+
+
+                try {
+                    const capabilities = await PublicKeyCredential.getClientCapabilities();
+
+                    console.log(JSON.stringify(capabilities));
+
+                    // Passkey Platform Authenticator
+                    if (capabilities.hasOwnProperty('passkeyPlatformAuthenticator')) capabilities.passkeyPlatformAuthenticator ? updateStyle("ppa", "s") : updateStyle("ppa", "ns")
+
+                    // UVPAA
+                    if (capabilities.hasOwnProperty('userVerifyingPlatformAuthenticator')) capabilities.userVerifyingPlatformAuthenticator ? updateStyle("uvpa", "s") : updateStyle("uvpa", "ns")
+
+                    // Hybrid
+                    if (capabilities.hasOwnProperty('hybridTransport')) capabilities.hybridTransport ? updateStyle("hybrid", "s") : updateStyle("hybrid", "ns")
+
+
+                    // Conditional Get
+                    if (capabilities.hasOwnProperty('conditionalGet')) capabilities.conditionalGet ? updateStyle("condget", "s") : updateStyle("condget", "ns")
+                    if (capabilities.hasOwnProperty('conditionalMediation')) capabilities.conditionalMediation ? updateStyle("condget", "s") : updateStyle("condget", "ns")
+
+                    // Conditional Create
+                    if (capabilities.hasOwnProperty('conditionalCreate')) capabilities.conditionalCreate ? updateStyle("condcreate", "s") : updateStyle("condcreate", "ns")
+
+                    // Related Origins
+                    if (capabilities.hasOwnProperty('relatedOrigins')) capabilities.relatedOrigins ? updateStyle("ror", "s") : updateStyle("ror", "ns")
+
+                    // Extension: PRF
+                    if (capabilities.hasOwnProperty('extension:prf')) capabilities['extension:prf'] ? updateStyle("extprf", "s") : updateStyle("extprf", "ns")
+
+
+                } catch (error) {
+                    console.error("Error fetching client capabilities:", error);
+                }
+            } else {
+                // Set Get Client Capabilities to Not Supported
+                updateStyle("getcc", "ns")
+
+                // Check isUVPAA and isConditionalMediation the old way
+                try {
+                    const isuvpaa = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+                    isuvpaa ? updateStyle("uvpa", "s") : updateStyle("uvpa", "ns");
+
+                } catch (error) {
+                    console.error("Error fetching PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable():", error);
+                }
+
+                try {
+                    const iscma = await PublicKeyCredential.isConditionalMediationAvailable();
+                    iscma ? updateStyle("condget", "s") : updateStyle("condget", "ns");
+                } catch (error) {
+                    console.error("Error fetching PublicKeyCredential.isConditionalMediationAvailable():", error);
+                }
+
+            }
+
+            // JSON Helpers
+            typeof window.PublicKeyCredential.parseRequestOptionsFromJSON === 'function' ? updateStyle("jsonreq", "s") : updateStyle("jsonreq", "ns");
+            typeof window.PublicKeyCredential.parseCreationOptionsFromJSON === 'function' ? updateStyle("jsoncreate", "s") : updateStyle("jsoncreate", "ns");
+            typeof window.PublicKeyCredential.parseCreationOptionsFromJSON === 'function' ? updateStyle("tojson", "s") : updateStyle("tojson", "ns")
+
+
+        } else {
+            document.getElementById("list").style.display = none;
+            document.getElementById("nowebauthn").style.display = block;
+        }
+    };
+
+    //getBrowserInfo();
+    checkClientFeatures();
+
+</script>
+</html>
