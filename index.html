@@ -38,9 +38,6 @@
                 </div>
                 <div id="list" class="mt-5">
                     <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-center pt-3">
-                            <h4>Features</h4>
-                        </li>
                         <li id="getcc" class="list-group-item d-flex justify-content-between align-items-center">
                             <a href="https://w3c.github.io/webauthn/#sctn-getClientCapabilities" target="_blank">
                                 Get Client Capabilities</a>
@@ -77,9 +74,6 @@
                                 target="_blank">Parse JSON Creation Options</a>
                             <span id="pill-jsoncreate" class="badge rounded-pill bg-secondary">Unknown</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center pt-3">
-                            <h4>Client Capabilities</h4>
-                        </li>
                         <li id="ppa" class="list-group-item d-flex justify-content-between align-items-center">
                             <a href="https://w3c.github.io/webauthn/#passkey-platform-authenticator" target="_blank">Passkey Platform Authenticator</a>
                             <span id="pill-ppa" class="badge rounded-pill bg-secondary">Unknown</span>
@@ -87,6 +81,18 @@
                         <li id="uvpa" class="list-group-item d-flex justify-content-between align-items-center">
                             <a href="https://w3c.github.io/webauthn/#user-verifying-platform-authenticator" target="_blank">User Verifying Platform Authenticator</a>
                             <span id="pill-uvpa" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="signalAac" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://w3c.github.io/webauthn/#sctn-signal-methods" target="_blank">RP Signals: All Accepted Credentials </a>
+                            <span id="pill-signalAac" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="signalCud" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://w3c.github.io/webauthn/#sctn-signal-methods" target="_blank">RP Signals: Current User Details </a>
+                            <span id="pill-signalCud" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="signalUc" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://w3c.github.io/webauthn/#sctn-signal-methods" target="_blank">RP Signals: Unknown Credential </a>
+                            <span id="pill-signalUc" class="badge rounded-pill bg-secondary">Unknown</span>
                         </li>
                         <li id="hybrid" class="list-group-item d-flex justify-content-between align-items-center">
                             <a href="https://passkeys.dev/docs/reference/terms/#cross-device-authentication-cda"
@@ -190,6 +196,14 @@
                     // Extension: PRF
                     if (capabilities.hasOwnProperty('extension:prf')) capabilities['extension:prf'] ? updateStyle("extprf", "s") : updateStyle("extprf", "ns")
 
+                    // RP Signals: All Accepted Credentials
+                    if (capabilities.hasOwnProperty('signalAllAcceptedCredentials')) capabilities['signalAllAcceptedCredentials'] ? updateStyle("signalAac", "s") : updateStyle("signalAac", "ns")
+
+                    // RP Signals: Current User Details
+                    if (capabilities.hasOwnProperty('signalCurrentUserDetails')) capabilities['signalCurrentUserDetails'] ? updateStyle("signalCud", "s") : updateStyle("signalCud", "ns")
+
+                    // RP Signals: All Accepted Credentials
+                    if (capabilities.hasOwnProperty('signalUnknownCredential')) capabilities['signalUnknownCredential'] ? updateStyle("signalUc", "s") : updateStyle("signalUc", "ns")
 
                 } catch (error) {
                     console.error("Error fetching client capabilities:", error);
@@ -221,6 +235,10 @@
             typeof window.PublicKeyCredential.parseCreationOptionsFromJSON === 'function' ? updateStyle("jsoncreate", "s") : updateStyle("jsoncreate", "ns");
             typeof window.PublicKeyCredential.parseCreationOptionsFromJSON === 'function' ? updateStyle("tojson", "s") : updateStyle("tojson", "ns")
 
+            // RP Signals
+            typeof window.PublicKeyCredential.signalAllAcceptedCredentials === 'function' ? updateStyle("signalAac", "s") : updateStyle("signalAac", "ns");
+            typeof window.PublicKeyCredential.signalCurrentUserDetails === 'function' ? updateStyle("signalCud", "s") : updateStyle("signalCud", "ns");
+            typeof window.PublicKeyCredential.signalUnknownCredential === 'function' ? updateStyle("signalUc", "s") : updateStyle("signalUc", "ns");
 
         } else {
             document.getElementById("list").style.display = none;
