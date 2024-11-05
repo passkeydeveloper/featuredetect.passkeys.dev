@@ -99,13 +99,28 @@
                             RP Signals: Unknown Credential
                             <span id="pill-signalUc" class="badge rounded-pill bg-secondary">Unknown</span>
                         </li>
-                        <li id="extprf" class="list-group-item d-flex justify-content-between align-items-center">
-                            <a href="https://w3c.github.io/webauthn/#prf-extension" target="_blank">Extension: PRF</a>
-                            <span id="pill-extprf" class="badge rounded-pill bg-secondary">Unknown</span>
-                        </li>
                     </ul>
                 </div>
             </div>
+            <div class="accordion mt-3" id="extensions">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Extensions
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#extensions">
+                    <div class="accordion-body">
+                      <ul>
+                        <li id="extprf" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://w3c.github.io/webauthn/#prf-extension" target="_blank">Pseudo-random function</a>
+                            <span id="pill-extprf" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
             <div class="alert alert-primary text-center mt-3" role="alert">
                 This is a <strong>developer</strong> resource for WebAuthn Relying Parties and Clients.<br/>
                 It is not intended to convey general support for passkeys for end users.
