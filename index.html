@@ -254,7 +254,7 @@
             // JSON Helpers
             typeof window.PublicKeyCredential.parseRequestOptionsFromJSON === 'function' ? updateStyle("jsonreq", "s") : updateStyle("jsonreq", "ns");
             typeof window.PublicKeyCredential.parseCreationOptionsFromJSON === 'function' ? updateStyle("jsoncreate", "s") : updateStyle("jsoncreate", "ns");
-            typeof window.PublicKeyCredential.parseCreationOptionsFromJSON === 'function' ? updateStyle("tojson", "s") : updateStyle("tojson", "ns")
+            typeof window.PublicKeyCredential.prototype.toJSON === 'function' ? updateStyle("tojson", "s") : updateStyle("tojson", "ns")
 
             // RP Signals
             typeof window.PublicKeyCredential.signalAllAcceptedCredentials === 'function' ? updateStyle("signalAac", "s") : updateStyle("signalAac", "ns");
