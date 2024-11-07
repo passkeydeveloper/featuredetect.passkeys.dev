@@ -112,9 +112,53 @@
                   <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#extensions">
                     <div class="accordion-body">
                       <ul>
-                        <li id="extprf" class="list-group-item d-flex justify-content-between align-items-center">
-                            <a href="https://w3c.github.io/webauthn/#prf-extension" target="_blank">Pseudo-random function</a>
-                            <span id="pill-extprf" class="badge rounded-pill bg-secondary">Unknown</span>
+                        <li id="extCredProps" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://www.w3.org/TR/webauthn-2/#sctn-authenticator-credential-properties-extension" target="_blank">Credential Properties (credProps)</a>
+                            <span id="pill-extCredProps" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="extLargeBlob" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://www.w3.org/TR/webauthn-2/#sctn-large-blob-extension" target="_blank">Large Blob Storage</a>
+                            <span id="pill-extLargeBlob" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="extPrf" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://w3c.github.io/webauthn/#prf-extension" target="_blank">Pseudo-Random Function (PRF)</a>
+                            <span id="pill-extPrf" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="extPayment" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://www.w3.org/TR/secure-payment-confirmation/#sctn-payment-extension-registration" target="_blank">Secure Payment Confirmation (SPC)</a>
+                            <span id="pill-extPayment" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="extAppId" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://www.w3.org/TR/webauthn-2/#sctn-appid-extension" target="_blank">FIDO AppID</a>
+                            <span id="pill-extAppId" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="extAppIdExclude" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://www.w3.org/TR/webauthn-2/#sctn-appid-exclude-extension" target="_blank">FIDO AppID Exclusion Extension</a>
+                            <span id="pill-extAppIdExclude" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="extCredBlob" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://fidoalliance.org/specs/fido-v2.1-ps-20210615/fido-client-to-authenticator-protocol-v2.1-ps-errata-20220621.html#sctn-credBlob-extension" target="_blank">FIDO2 Credential Blob (credBlob)</a>
+                            <span id="pill-extCredBlob" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="extGetCredBlob" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://fidoalliance.org/specs/fido-v2.1-ps-20210615/fido-client-to-authenticator-protocol-v2.1-ps-errata-20220621.html#sctn-credBlob-extension" target="_blank">FIDO2 Get Credential Blob</a>
+                            <span id="pill-extGetCredBlob" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="extCredentialProtectionPolicy" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://fidoalliance.org/specs/fido-v2.1-ps-20210615/fido-client-to-authenticator-protocol-v2.1-ps-errata-20220621.html#sctn-credProtect-extension" target="_blank">FIDO2 Credential Protection Policy (credProtect)</a>
+                            <span id="pill-extCredentialProtectionPolicy" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="extEnforceCredentialProtectionPolicy" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://fidoalliance.org/specs/fido-v2.1-ps-20210615/fido-client-to-authenticator-protocol-v2.1-ps-errata-20220621.html#sctn-credProtect-extension" target="_blank">FIDO2 Enforce Credential Protection Policy</a>
+                            <span id="pill-extEnforceCredentialProtectionPolicy" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="extHmacCreateSecret" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://fidoalliance.org/specs/fido-v2.1-ps-20210615/fido-client-to-authenticator-protocol-v2.1-ps-errata-20220621.html#sctn-hmac-secret-extension" target="_blank">FIDO2 HMAC Secret</a>
+                            <span id="pill-extHmacCreateSecret" class="badge rounded-pill bg-secondary">Unknown</span>
+                        </li>
+                        <li id="extMinPinLength" class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="https://fidoalliance.org/specs/fido-v2.1-ps-20210615/fido-client-to-authenticator-protocol-v2.1-ps-errata-20220621.html#sctn-minpinlength-extension" target="_blank">FIDO2 Minimum PIN Length (minPinLength)</a>
+                            <span id="pill-extMinPinLength" class="badge rounded-pill bg-secondary">Unknown</span>
                         </li>
                       </ul>
                     </div>
@@ -214,9 +258,6 @@
                     // Related Origins
                     if (capabilities.hasOwnProperty('relatedOrigins')) capabilities.relatedOrigins ? updateStyle("ror", "s") : updateStyle("ror", "ns")
 
-                    // Extension: PRF
-                    if (capabilities.hasOwnProperty('extension:prf')) capabilities['extension:prf'] ? updateStyle("extprf", "s") : updateStyle("extprf", "ns")
-
                     // RP Signals: All Accepted Credentials
                     if (capabilities.hasOwnProperty('signalAllAcceptedCredentials')) capabilities['signalAllAcceptedCredentials'] ? updateStyle("signalAac", "s") : updateStyle("signalAac", "ns")
 
@@ -225,6 +266,20 @@
 
                     // RP Signals: All Accepted Credentials
                     if (capabilities.hasOwnProperty('signalUnknownCredential')) capabilities['signalUnknownCredential'] ? updateStyle("signalUc", "s") : updateStyle("signalUc", "ns")
+
+                    // Extensions
+                    if (capabilities.hasOwnProperty('extension:appid')) capabilities['extension:appid'] ? updateStyle("extAppId", "s") : updateStyle("extAppId", "ns")
+                    if (capabilities.hasOwnProperty('extension:appidExclude')) capabilities['extension:appidExclude'] ? updateStyle("extAppidExclude", "s") : updateStyle("extAppidExclude", "ns")
+                    if (capabilities.hasOwnProperty('extension:hmacCreateSecret')) capabilities['extension:hmacCreateSecret'] ? updateStyle("extHmacCreateSecret", "s") : updateStyle("extHmacCreateSecret", "ns")
+                    if (capabilities.hasOwnProperty('extension:credentialProtectionPolicy')) capabilities['extension:credentialProtectionPolicy'] ? updateStyle("extCredentialProtectionPolicy", "s") : updateStyle("extCredentialProtectionPolicy", "ns")
+                    if (capabilities.hasOwnProperty('extension:enforceCredentialProtectionPolicy')) capabilities['extension:enforceCredentialProtectionPolicy'] ? updateStyle("extEnforceCredentialProtectionPolicy", "s") : updateStyle("extEnforceCredentialProtectionPolicy", "ns")
+                    if (capabilities.hasOwnProperty('extension:minPinLength')) capabilities['extension:minPinLength'] ? updateStyle("extMinPinLength", "s") : updateStyle("extMinPinLength", "ns")
+                    if (capabilities.hasOwnProperty('extension:credProps')) capabilities['extension:credProps'] ? updateStyle("extCredProps", "s") : updateStyle("extCredProps", "ns")
+                    if (capabilities.hasOwnProperty('extension:largeBlob')) capabilities['extension:largeBlob'] ? updateStyle("extLargeBlob", "s") : updateStyle("extLargeBlob", "ns")
+                    if (capabilities.hasOwnProperty('extension:credBlob')) capabilities['extension:credBlob'] ? updateStyle("extCredBlob", "s") : updateStyle("extCredBlob", "ns")
+                    if (capabilities.hasOwnProperty('extension:getCredBlob')) capabilities['extension:getCredBlob'] ? updateStyle("extGetCredBlob", "s") : updateStyle("extGetCredBlob", "ns")
+                    if (capabilities.hasOwnProperty('extension:payment')) capabilities['extension:payment'] ? updateStyle("extPayment", "s") : updateStyle("extPayment", "ns")
+                    if (capabilities.hasOwnProperty('extension:prf')) capabilities['extension:prf'] ? updateStyle("extPrf", "s") : updateStyle("extPrf", "ns")
 
                 } catch (error) {
                     console.error("Error fetching client capabilities:", error);
