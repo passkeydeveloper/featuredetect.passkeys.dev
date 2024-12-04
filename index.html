@@ -37,6 +37,9 @@
                         <h2>WebAuthn is not supported in this browser</h2>
                     </div>
                 </div>
+                <div id="client" class="text-center mt-3">
+                    <h4><span class="badge bg-primary" id="clientShortName">Loading client name...</span></h4>
+                </div>
                 <div id="list" class="mt-3">
                     <ul class="list-group">
                         <li id="ppa" class="list-group-item d-flex justify-content-between align-items-center">
@@ -178,6 +181,13 @@
     </div>
 </body>
 <script src="js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ua-parser-js/dist/ua-parser.min.js"></script>
+<script>
+    const uap = new UAParser();
+    const result = uap.getResult();
+    const friendlyName = `${result.browser.name} ${result.browser.major}` || "Unknown Client";
+    document.getElementById("clientShortName").textContent = friendlyName;
+</script>
 <script>
 
     function updateStyle(id, type) {
@@ -207,23 +217,6 @@
             liElement.classList.add("list-group-item-danger");
         }
     }
-
-    //function getBrowserInfo() {
-    //    var details = {};
-    //
-    //    if (typeof navigator.userAgentData !== 'undefined') {
-    //
-    //        data = navigator.userAgentData;
-    //
-    //        details.os = data.platform;
-    //        details.browserName = data.brands[2].brand;
-    //        details.browserVersion = data.brands[2].version;
-    //    } else {
-    //        
-    //    }
-    //
-    //    return details;
-    //}
 
     async function checkClientFeatures() {
 
