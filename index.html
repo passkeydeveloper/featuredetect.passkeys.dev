@@ -190,33 +190,29 @@
 </script>
 <script>
 
-    function updateStyle(id, type) {
-        if (type === "s") {
-            var pillElement = document.getElementById(`pill-${id}`);
-            pillElement.className = "badge rounded-pill bg-success";
-            pillElement.textContent = "Supported";
-            var liElement = document.getElementById(id);
-            liElement.classList.add("list-group-item-success");
-        } else if (type === "ns") {
-            var pillElement = document.getElementById(`pill-${id}`);
-            pillElement.className = "badge rounded-pill bg-danger";
-            pillElement.textContent = "Not Supported";
-            var liElement = document.getElementById(id);
-            liElement.classList.add("list-group-item-danger");
-        } else if (type === "a") {
-            var pillElement = document.getElementById(`pill-${id}`);
-            pillElement.className = "badge rounded-pill bg-success";
-            pillElement.textContent = "Available";
-            var liElement = document.getElementById(id);
-            liElement.classList.add("list-group-item-success");
-        } else if (type === "na") {
-            var pillElement = document.getElementById(`pill-${id}`);
-            pillElement.className = "badge rounded-pill bg-danger";
-            pillElement.textContent = "Not Available";
-            var liElement = document.getElementById(id);
-            liElement.classList.add("list-group-item-danger");
-        }
+function updateStyle(id, type) {
+    var pillElement = document.getElementById(`pill-${id}`);
+    var liElement = document.getElementById(id);
+    if (!pillElement || !liElement) return;
+
+    if (type === "s") {
+        pillElement.className = "badge rounded-pill bg-success";
+        pillElement.textContent = "Supported";
+        liElement.classList.add("list-group-item-success");
+    } else if (type === "ns") {
+        pillElement.className = "badge rounded-pill bg-danger";
+        pillElement.textContent = "Not Supported";
+        liElement.classList.add("list-group-item-danger");
+    } else if (type === "a") {
+        pillElement.className = "badge rounded-pill bg-success";
+        pillElement.textContent = "Available";
+        liElement.classList.add("list-group-item-success");
+    } else if (type === "na") {
+        pillElement.className = "badge rounded-pill bg-danger";
+        pillElement.textContent = "Not Available";
+        liElement.classList.add("list-group-item-danger");
     }
+}
 
     async function checkClientFeatures() {
 
@@ -262,7 +258,7 @@
 
                     // Extensions
                     if (capabilities.hasOwnProperty('extension:appid')) capabilities['extension:appid'] ? updateStyle("extAppId", "s") : updateStyle("extAppId", "ns")
-                    if (capabilities.hasOwnProperty('extension:appidExclude')) capabilities['extension:appidExclude'] ? updateStyle("extAppidExclude", "s") : updateStyle("extAppidExclude", "ns")
+                    if (capabilities.hasOwnProperty('extension:appidExclude')) capabilities['extension:appIdExclude'] ? updateStyle("extAppIdExclude", "s") : updateStyle("extAppIdExclude", "ns")
                     if (capabilities.hasOwnProperty('extension:hmacCreateSecret')) capabilities['extension:hmacCreateSecret'] ? updateStyle("extHmacCreateSecret", "s") : updateStyle("extHmacCreateSecret", "ns")
                     if (capabilities.hasOwnProperty('extension:credentialProtectionPolicy')) capabilities['extension:credentialProtectionPolicy'] ? updateStyle("extCredentialProtectionPolicy", "s") : updateStyle("extCredentialProtectionPolicy", "ns")
                     if (capabilities.hasOwnProperty('extension:enforceCredentialProtectionPolicy')) capabilities['extension:enforceCredentialProtectionPolicy'] ? updateStyle("extEnforceCredentialProtectionPolicy", "s") : updateStyle("extEnforceCredentialProtectionPolicy", "ns")
